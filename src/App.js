@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
-
+import {  useState , useEffect } from "react";
+import { getUsers } from "./Services";
+import Axios from 'axios';
+import Table from "./component/table";
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+    const [users , setUsers] = useState([]) 
+
+    const getusers = async() =>{
+	    const users = await getUsers();
+	    setUsers(users)
+    }
+ 
+    useEffect(()=>{
+	getusers();
+    } , []);
+
+    return(
+	<div className="container">
+	    <Table users={users}/>
+	</div>
+    )
+ 
 }
 
 export default App;
