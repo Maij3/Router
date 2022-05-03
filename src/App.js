@@ -2,6 +2,10 @@ import {  useState , useEffect } from "react";
 import { getUsers } from "./Services";
 import Axios from 'axios';
 import Table from "./component/table";
+import { Routes , Route , Link  , Router} from "react-router-dom";
+import User from "./component/user";
+
+
 function App() {
 
     const [users , setUsers] = useState([]) 
@@ -10,15 +14,22 @@ function App() {
 	    const users = await getUsers();
 	    setUsers(users)
     }
+    
  
     useEffect(()=>{
 	getusers();
     } , []);
 
     return(
-	<div className="container">
-	    <Table users={users}/>
-	</div>
+	<Routes>
+	    <Route path="/" element = {
+		    <Table users={users}/>
+	    }/>
+	    <Route path="/user/:id" element ={
+		    <User />
+	    }/>		    
+	</Routes>
+
     )
  
 }
