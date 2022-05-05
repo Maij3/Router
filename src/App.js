@@ -28,6 +28,7 @@ function App() {
 	    <Route path="/user/:id" element ={
 		    <User />
 	    }/>		    
+	    <Route path="*" element={<h1>Not Found</h1>} />		    
 	</Routes>
 
     )
